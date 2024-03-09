@@ -30,13 +30,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.gunder.state.R
 import com.gunder.state.ui.state.LoginState
 import com.gunder.state.ui.state.loginStateRemember
 import com.gunder.state.ui.theme.StateTheme
 
 @Composable
-fun LoginScreen(state: LoginState = loginStateRemember(inputState = "", alertState = false)) {
+fun LoginScreen(navController: NavController, state: LoginState = loginStateRemember(inputState = "", alertState = false)) {
 
     Column(
         modifier = Modifier
@@ -86,8 +87,7 @@ fun LoginScreen(state: LoginState = loginStateRemember(inputState = "", alertSta
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    // Show dialog on login button click
-                    state.showDialog = true
+
                 }
             ),
             visualTransformation = PasswordVisualTransformation(),
@@ -99,8 +99,9 @@ fun LoginScreen(state: LoginState = loginStateRemember(inputState = "", alertSta
         // Login Button
         Button(
             onClick = {
+                navController.navigate("home")
                 // Show dialog on login button click
-                state.showDialog = true
+//                state.showDialog = true
             },
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -135,13 +136,5 @@ fun LoginScreen(state: LoginState = loginStateRemember(inputState = "", alertSta
                 }
             )
         }
-    }
-}
-
-@Composable
-@Preview(showBackground = true)
-fun LoginScreenPreview() {
-    StateTheme {
-        LoginScreen()
     }
 }
